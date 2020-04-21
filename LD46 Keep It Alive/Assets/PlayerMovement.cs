@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("Button").GetComponentInChildren<Text>().text = "Restart";
+        //GameObject.Find("Button").transform.position = new Vector3((Screen.width / 2 * -1) + 20, (Screen.height / 2) - 20, 0);
+        GameObject.Find("Button").transform.position = new Vector3( 50,  20, 0);
+        //GameObject.Find("Button").SetActive(false);
+        
         pos = new Vector2((Screen.width / 2) - 150, 40);
         
         _health = 1f;
@@ -149,11 +155,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnPlayerDead()
     {
+        //GameObject.Find("Button").SetActive(true);
+        
         var audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(DeadSound);
         
         this.transform.Rotate(Vector3.back, 90);
         Destroy(this);
+        
+        
     }
     
     private void InitStyles()
